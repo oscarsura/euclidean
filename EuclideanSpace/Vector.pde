@@ -20,15 +20,21 @@ public class Vector {
     //need to ensure that this will expand the array, may be slow
     public void addComponent(int value) {
         int[] newVector = new int[dimension++];
+        int index;
+        for (index = 0; index < vector.length; index++) {
+            newVector[index] = vector[index];   
+        }
+        newVector[index] = value;
+        vector = newVector;
     }
     
     private static final int kOutOfBounds = -1;
-    public int getComponent(int index) {
+    public int getAt(int index) {
         boolean inBounds = (index >= 0) && (index < vector.length);
         return inBounds ? vector[index] : kOutOfBounds;
     }
     
-    public int getDimension() {
+    public int dimension() {
         return dimension;    
     }
     
