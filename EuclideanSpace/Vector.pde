@@ -3,6 +3,11 @@ public class Vector {
     private int dimension = kDefaultDimension;    
     private int[] vector;
     
+    public Vector() {
+        this.dimension = 0;
+        vector = new int[0];
+    }
+    
     public Vector(int... vector) {
         this.dimension = vector.length;
         this.vector = new int[dimension];
@@ -10,6 +15,11 @@ public class Vector {
         for (int i = 0; i < dimension; i++) {
             this.vector[i] = vector[i];        
         }
+    }
+    
+    //need to ensure that this will expand the array, may be slow
+    public void addComponent(int value) {
+        int[] newVector = new int[dimension++];
     }
     
     private static final int kOutOfBounds = -1;
