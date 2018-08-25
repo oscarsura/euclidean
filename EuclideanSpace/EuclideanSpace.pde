@@ -1,11 +1,5 @@
-/*
- *
- *
- *
- */
-
 void setup() {
-
+    
 }
 
 void draw() {
