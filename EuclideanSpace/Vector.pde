@@ -9,6 +9,15 @@ public class Vector {
         vector = new int[0];
     }
     
+    public static final int kDefaultComponent = 0;
+    public Vector(int dimension) {
+        this.dimension = dimension;
+        vector = new int[dimension];
+        for (int i = 0; i < dimension; i++) {
+            vector[i] = kDefaultComponent;
+        }
+    }
+    
     public Vector(int... vector) {
         this.dimension = vector.length;
         this.vector = new int[dimension];
@@ -32,6 +41,11 @@ public class Vector {
     public int getAt(int index) {
         boolean inBounds = (index >= 0) && (index < vector.length);
         return inBounds ? vector[index] : kOutOfBounds;
+    }
+    
+    public void setAt(int index, int value) {
+        boolean inBounds = (index >= 0) && (index < vector.length);
+        if (inBounds) vector[index] = value;
     }
     
     private static final int kDimensionMismatch = -1;
