@@ -9,8 +9,30 @@ public class Matrix {
         matrix = new ArrayList<Vector>();
     }
     
-    public void addVector(Vector v) {
-        matrix.add(v);    
+    public Matrix(int[] ...rows) {
+        matrix = new ArrayList<Vector>();
+        for (int[] row : rows) {
+            Vector v = new Vector(row);
+            this.addVector(v);    
+        }
+        
+        //iterate over all of the vectors, and make sure they are the same length
+        //if they are not, then append zeros to the end of the vector to make it the length of the longest
+    }
+    
+    public void addVector(Vector vector) {
+        matrix.add(vector);
+        println(matrix.toString());
+    }
+    
+    public Vector projectVector(Vector columnVector) {
+        Vector projection = new Vector();
+        for (int i = 0; i < n; i++) {
+            Vector rowVector = this.getRowVector(i);
+            int component = rowVector.dotProduct(columnVector);
+            projection.addComponent(component);   
+        }
+        return projection;
     }
 
     public Vector getRowVector(int index) {
@@ -35,4 +57,23 @@ public class Matrix {
         assert(columnVector.dimension() == n);
         return columnVector;
     }
+    
+    @Override
+    public String toString() {
+        return matrix.toString();    
+    }
+    
+    /*@Override
+    public String toString() {
+        String output = "";
+        output += "[";
+        //n has never been set!!! neither has m!!!
+        for (int i = 0; i < n; i++) {
+            Vector row = this.getRowVector(i);
+            output += row.toString();
+            if (i < n - 1) output += ",\n";
+        }
+        output += "]";
+        return output;
+    }*/
 }
