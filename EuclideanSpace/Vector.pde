@@ -19,7 +19,7 @@ public class Vector {
     }
     
     public void addComponent(int value) {
-        int[] newVector = new int[dimension++];
+        int[] newVector = new int[++dimension];
         int index;
         for (index = 0; index < vector.length; index++) {
             newVector[index] = vector[index];   

@@ -9,20 +9,31 @@ public class Matrix {
         matrix = new ArrayList<Vector>();
     }
     
+    public static final int kEmptyComponent = 0;
     public Matrix(int[] ...rows) {
         matrix = new ArrayList<Vector>();
+        int dimension = 0;
         for (int[] row : rows) {
-            Vector v = new Vector(row);
-            this.addVector(v);    
+            Vector rowVector = new Vector(row);
+            this.addVector(rowVector);
+            if (rowVector.dimension() > dimension) {
+                dimension = rowVector.dimension();   
+            }
+            n++;
         }
         
-        //iterate over all of the vectors, and make sure they are the same length
-        //if they are not, then append zeros to the end of the vector to make it the length of the longest
+        for (Vector rowVector : matrix) {
+            if (rowVector.dimension() < dimension) {
+                int diff = dimension - rowVector.dimension();
+                for (int i = 0; i < diff; i++) {
+                    rowVector.addComponent(kEmptyComponent);   
+                }
+            }
+        }
     }
     
     public void addVector(Vector vector) {
         matrix.add(vector);
-        println(matrix.toString());
     }
     
     public Vector projectVector(Vector columnVector) {
@@ -60,20 +71,16 @@ public class Matrix {
     
     @Override
     public String toString() {
-        return matrix.toString();    
-    }
-    
-    /*@Override
-    public String toString() {
         String output = "";
         output += "[";
         //n has never been set!!! neither has m!!!
         for (int i = 0; i < n; i++) {
             Vector row = this.getRowVector(i);
+            if (i > 0) output += " ";
             output += row.toString();
             if (i < n - 1) output += ",\n";
         }
         output += "]";
         return output;
-    }*/
+    }
 }
