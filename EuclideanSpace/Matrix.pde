@@ -37,10 +37,7 @@ public class Matrix {
             addVector(new Vector(n));
         }   
     }
-
-    //transpose
-    //multiply
-
+    
     public static final int kEmptyComponent = 0;
     public Matrix(int[] ...rows) {
         matrix = new ArrayList<Vector>();
@@ -62,11 +59,38 @@ public class Matrix {
                 }
             }
         }
+        m = dimension;
+    }
+    
+    //transpose
+    public Matrix multiply(Matrix b) {
+        int cols = this.getColumns();
+        int rows = b.getRows();
+        Matrix result = new Matrix(this.getRows(), b.getColumns());
+        if (cols != rows) return result;
+        
+        for (int r = 0; r < rows; r++) {
+            Vector newRow = new Vector(cols);
+             for (int c = 0; c < rows; c++) {
+                 Vector column = b.getColumnVector(c);
+                 Vector row = this.getRowVector(r);
+                 int dotProduct = row.dotProduct(column);
+                 newRow.setAt(c, dotProduct);
+             }
+             result.addVector(newRow);
+        }
+        return result;
+    }
+    
+    public Matrix mutiply(Matrix... matrices) {
+        Matrix result = new Matrix(); 
+        //m by n AND n by p AND p by l AND l by z
+        for (int i = 0; i < matrices.length - 1; i++) {
+            Matrix a = matrices[i];    
+        }
+        return result;
     }
 
-    public void addVector(Vector vector) {
-        matrix.add(vector);
-    }
 
     public Vector projectVector(Vector columnVector) {
         Vector projection = new Vector();
@@ -99,6 +123,26 @@ public class Matrix {
         }
         assert(columnVector.dimension() == m);
         return columnVector;
+    }
+    
+    public int getRows() {
+        return m;    
+    }
+    
+    public int getColumns() {
+        return n;    
+    }
+    
+    public void addVector(Vector vector) {
+        matrix.add(vector);
+    }
+    
+    public void setRows(int m) {
+        this.m = m;    
+    }
+    
+    public void setColumns(int n) {
+        this.n = n;
     }
 
     @Override
