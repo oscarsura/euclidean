@@ -39,10 +39,10 @@ public class Matrix {
     }
     
     public static final int kEmptyComponent = 0;
-    public Matrix(int[] ...rows) {
+    public Matrix(float[] ...rows) {
         matrix = new ArrayList<Vector>();
         int dimension = 0;
-        for (int[] row : rows) {
+        for (float[] row : rows) {
             Vector rowVector = new Vector(row);
             this.addVector(rowVector);
             if (rowVector.dimension() > dimension) {
@@ -74,7 +74,7 @@ public class Matrix {
              for (int c = 0; c < rows; c++) {
                  Vector column = b.getColumnVector(c);
                  Vector row = this.getRowVector(r);
-                 int dotProduct = row.dotProduct(column);
+                 float dotProduct = row.dotProduct(column);
                  newRow.setAt(c, dotProduct);
              }
              result.addVector(newRow);
@@ -91,12 +91,15 @@ public class Matrix {
         return result;
     }
 
+    public void clearAll() {
+        matrix.clear();        
+    }
 
     public Vector projectVector(Vector columnVector) {
         Vector projection = new Vector();
         for (int i = 0; i < m; i++) {
             Vector rowVector = this.getRowVector(i);
-            int component = rowVector.dotProduct(columnVector);
+            float component = rowVector.dotProduct(columnVector);
             projection.addComponent(component);
         }
         return projection;
@@ -115,7 +118,7 @@ public class Matrix {
         for (Vector rowVector : matrix) {
             for (int i = 0; i < rowVector.dimension(); i++) {
                 if (i == index) {
-                    int toAdd = rowVector.getAt(i);
+                    float toAdd = rowVector.getAt(i);
                     columnVector.addComponent(toAdd);
                 }
                 if (i > index) break;

@@ -1,11 +1,17 @@
 void setup() {
-    Matrix identity = new Matrix(MatrixType.Identity, 3, 3);
-    Matrix numerals = new Matrix(new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9});
-    Matrix product = identity.multiply(numerals);
-    
-    println("The original matrix:");
-    println(numerals.toString());
-    println("The result is:");
-    println(product.toString());
+    size(800, 800);
+    background(50, 30, 100);
 }
-void draw() {}
+
+private boolean random = false;
+private float theta = 0.01;
+private float delta = 0.000001;
+private Euclidean4D cube = new Euclidean4D(100, 4);
+void draw() {
+    background(0);
+    translate(width/2, height/2);
+    color shapeColor = random ? color(random(255), random(255), random(255)) : color(255, 255, 255);
+    cube.drawShape(shapeColor);
+    cube.rotate(theta);
+    theta += delta;
+}
