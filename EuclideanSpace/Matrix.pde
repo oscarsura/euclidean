@@ -84,9 +84,9 @@ public class Matrix {
     
     public Matrix mutiply(Matrix... matrices) {
         Matrix result = new Matrix(); 
-        //m by n AND n by p AND p by l AND l by z
         for (int i = 0; i < matrices.length - 1; i++) {
-            Matrix a = matrices[i];    
+            Matrix a = matrices[i];
+            Matrix b = matrices[i+1];
         }
         return result;
     }
